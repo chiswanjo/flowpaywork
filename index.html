@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlowPay — Who's Making More Than You?</title>
+
+  <!-- ─── FAVICON ─── -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a08'/%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23c8f23a' stroke-width='2'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-size='14' fill='%23c8f23a' font-style='italic'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <!-- ─── SOCIAL / OG META ─── -->
+  <meta property="og:title"       content="FlowPay — Who's making more than you?" />
+  <meta property="og:description" content="See which startups in your industry are already out-earning you. Verified revenue data from TrustMRR's $1.2B database. Unlock for $2.9." />
+  <meta property="og:url"         content="https://flowpay.work" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:image"       content="https://flowpay.work/og.png" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:title"      content="FlowPay — Who's making more than you?" />
+  <meta name="twitter:description" content="See which startups in your industry are already out-earning you. $2.9 one-time unlock. Powered by TrustMRR." />
+  <meta name="twitter:image"      content="https://flowpay.work/og.png" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a08; --surface: #111110; --border: #2a2a26;
+      --accent: #c8f23a; --text: #e8e6df; --muted: #7a7870;
+      --danger: #ff5e3a; --card-bg: #141413;
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--text); font-family:'Syne',sans-serif; min-height:100vh; overflow-x:hidden; }
+    body::before {
+      content:''; position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:0; opacity:0.5;
+    }
+    .blob { position:fixed; width:700px; height:700px; border-radius:50%; background:radial-gradient(circle,rgba(200,242,58,.07) 0%,transparent 70%); top:-250px; left:50%; transform:translateX(-50%); pointer-events:none; z-index:0; animation:blobFloat 9s ease-in-out infinite; }
+    @keyframes blobFloat { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(50px)} }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,.04); backdrop-filter:blur(14px); background:rgba(10,10,8,.75); }
+    .logo { font-family:'Instrument Serif',serif; font-size:1.5rem; letter-spacing:-.02em; }
+    .logo span { color:var(--accent); }
+    .price-pill { font-family:'DM Mono',monospace; font-size:.72rem; background:rgba(200,242,58,.1); border:1px solid rgba(200,242,58,.3); color:var(--accent); padding:6px 14px; border-radius:20px; letter-spacing:.06em; }
+
+    /* HERO */
+    .hero { position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 24px 80px; }
+    .eyebrow { font-family:'DM Mono',monospace; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:24px; display:flex; align-items:center; gap:10px; }
+    .eyebrow::before,.eyebrow::after { content:''; width:32px; height:1px; background:var(--accent); opacity:.5; }
+    h1 { font-family:'Instrument Serif',serif; font-size:clamp(3rem,8vw,7rem); line-height:1; letter-spacing:-.03em; max-width:900px; margin-bottom:12px; }
+    h1 em { font-style:italic; color:var(--accent); }
+    .hero-sub { font-size:1.05rem; color:var(--muted); max-width:520px; line-height:1.65; margin:24px auto 14px; font-weight:400; }
+    .hero-price-note { font-family:'DM Mono',monospace; font-size:.72rem; color:var(--muted); margin-bottom:36px; letter-spacing:.06em; }
+    .hero-price-note strong { color:var(--accent); }
+    .cta-btn { display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:#0a0a08; font-family:'Syne',sans-serif; font-size:.9rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:18px 36px; border:none; border-radius:4px; cursor:pointer; transition:all .2s; text-decoration:none; }
+    .cta-btn:hover { background:#d8ff4a; transform:translateY(-2px); box-shadow:0 8px 32px rgba(200,242,58,.25); }
+
+    /* TICKER */
+    .ticker-wrap { width:100%; overflow:hidden; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:14px 0; background:var(--surface); position:relative; z-index:1; }
+    .ticker-track { display:flex; animation:ticker 34s linear infinite; white-space:nowrap; }
+    .ticker-item { font-family:'DM Mono',monospace; font-size:.72rem; letter-spacing:.06em; color:var(--muted); padding:0 36px; display:flex; align-items:center; gap:12px; }
+    .ticker-item .amt { color:var(--accent); font-weight:500; }
+    .ticker-dot { width:5px; height:5px; border-radius:50%; background:var(--border); }
+    @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* FORM */
+    .form-section { position:relative; z-index:1; max-width:760px; margin:0 auto; padding:80px 24px 100px; }
+    .section-label { font-family:'DM Mono',monospace; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:40px; display:flex; align-items:center; gap:12px; }
+    .section-label span { color:var(--accent); }
+    .form-card { background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:48px; position:relative; overflow:hidden; }
+    .form-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--accent),transparent); }
+    .form-title { font-family:'Instrument Serif',serif; font-size:2rem; letter-spacing:-.02em; margin-bottom:8px; }
+    .form-desc { font-size:.88rem; color:var(--muted); margin-bottom:36px; line-height:1.6; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .form-group { display:flex; flex-direction:column; gap:8px; }
+    .form-group.full { grid-column:1/-1; }
+    label { font-family:'DM Mono',monospace; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+    input, select { background:var(--bg); border:1px solid var(--border); border-radius:6px; color:var(--text); font-family:'Syne',sans-serif; font-size:.9rem; padding:12px 16px; outline:none; transition:border-color .2s,box-shadow .2s; -webkit-appearance:none; }
+    input::placeholder { color:var(--muted); opacity:.5; }
+    input:focus, select:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(200,242,58,.1); }
+    select { cursor:pointer; }
+    select option { background:#1a1a18; }
+
+    /* PAYMENT GATE */
+    .payment-gate { margin-top:32px; background:rgba(200,242,58,.04); border:1px solid rgba(200,242,58,.2); border-radius:10px; padding:24px 28px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .gate-info { flex:1; }
+    .gate-label { font-family:'DM Mono',monospace; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+    .gate-title { font-size:1.05rem; font-weight:700; margin-bottom:4px; }
+    .gate-desc { font-size:.82rem; color:var(--muted); line-height:1.5; }
+    .gate-price { font-family:'Instrument Serif',serif; font-size:2.8rem; color:var(--accent); line-height:1; white-space:nowrap; }
+    .gate-price sup { font-size:1.2rem; vertical-align:super; }
+
+    .submit-btn { width:100%; margin-top:20px; background:var(--accent); color:#0a0a08; font-family:'Syne',sans-serif; font-size:.9rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:18px 24px; border:none; border-radius:6px; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:10px; }
+    .submit-btn:hover { background:#d8ff4a; transform:translateY(-1px); box-shadow:0 8px 24px rgba(200,242,58,.2); }
+    .submit-btn:disabled { opacity:.5; cursor:not-allowed; transform:none; box-shadow:none; }
+
+    .lock-note { text-align:center; margin-top:14px; font-family:'DM Mono',monospace; font-size:.68rem; color:var(--muted); letter-spacing:.06em; }
+    .lock-note a { color:var(--accent); text-decoration:none; }
+
+    .spinner { width:16px; height:16px; border:2px solid rgba(0,0,0,.3); border-top-color:#0a0a08; border-radius:50%; animation:spin .7s linear infinite; display:none; }
+    @keyframes spin { to{transform:rotate(360deg)} }
+    .error-box { margin-top:16px; background:rgba(255,94,58,.08); border:1px solid rgba(255,94,58,.25); border-radius:8px; padding:16px 20px; color:var(--danger); font-size:.85rem; font-family:'DM Mono',monospace; display:none; }
+
+    /* HOW */
+    .how-section { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:0 24px 120px; }
+    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:40px; }
+    .step { padding:24px; border:1px solid var(--border); border-radius:10px; background:var(--card-bg); }
+    .step-num { font-family:'DM Mono',monospace; font-size:.7rem; color:var(--accent); letter-spacing:.1em; margin-bottom:14px; }
+    .step h3 { font-size:.95rem; font-weight:700; margin-bottom:8px; }
+    .step p { font-size:.82rem; color:var(--muted); line-height:1.6; }
+
+    footer { position:relative; z-index:1; border-top:1px solid var(--border); padding:28px 40px; display:flex; align-items:center; justify-content:space-between; font-family:'DM Mono',monospace; font-size:.7rem; color:var(--muted); }
+    footer a { color:var(--accent); text-decoration:none; }
+
+    @media(max-width:640px) {
+      nav{padding:16px 20px;} .form-card{padding:28px 20px;} .form-grid{grid-template-columns:1fr;}
+      .steps{grid-template-columns:1fr 1fr;} .payment-gate{flex-direction:column;align-items:flex-start;}
+      footer{flex-direction:column;gap:8px;text-align:center;}
+    }
+    @media(max-width:400px){ .steps{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<div class="blob"></div>
+
+<nav>
+  <div class="logo">Flow<span>Pay</span></div>
+  <div class="price-pill">Unlock results · $2.9</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">Powered by TrustMRR · $1.2B Verified Revenue</div>
+  <h1>Who's making<br/><em>more</em> than you?</h1>
+  <p class="hero-sub">Submit your startup and instantly discover which businesses in your industry are outpacing your revenue — with verified numbers.</p>
+  <p class="hero-price-note">One-time unlock &nbsp;·&nbsp; <strong>$2.9</strong> &nbsp;·&nbsp; Results load instantly after checkout</p>
+  <a href="#submit" class="cta-btn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    Check my startup
+  </a>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+
+<!-- FORM -->
+<section class="form-section" id="submit">
+  <div class="section-label"><span>01</span> — Tell us about your startup</div>
+  <div class="form-card">
+    <div class="form-title">Submit your details</div>
+    <p class="form-desc">We'll match your startup against TrustMRR's verified revenue database and show you exactly who's ahead of you in your space.</p>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Website URL</label>
+        <input type="url" id="websiteUrl" placeholder="https://yoursite.com" />
+      </div>
+      <div class="form-group">
+        <label>Industry</label>
+        <select id="industry">
+          <option value="" disabled selected>Select industry</option>
+          <option>SaaS</option><option>E-commerce</option><option>Mobile App</option>
+          <option>Marketplace</option><option>Fintech</option><option>EdTech</option>
+          <option>Health &amp; Wellness</option><option>Developer Tools</option>
+          <option>AI / ML</option><option>Media &amp; Content</option><option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Location</label>
+        <input type="text" id="location" placeholder="San Francisco, US" />
+      </div>
+      <div class="form-group">
+        <label>Your Offering</label>
+        <input type="text" id="offering" placeholder="e.g. Project management tool" />
+      </div>
+      <div class="form-group">
+        <label>Founder Name</label>
+        <input type="text" id="founderName" placeholder="Jane Smith" />
+      </div>
+    </div>
+
+    <div class="payment-gate">
+      <div class="gate-info">
+        <div class="gate-label">One-time unlock</div>
+        <div class="gate-title">See who's ahead of you</div>
+        <div class="gate-desc">Pay once · Results load instantly · Secure checkout via Dodo Payments</div>
+      </div>
+      <div class="gate-price"><sup>$</sup>2.9</div>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span id="btnText">Pay $2.9 &amp; Unlock Results</span>
+      <div class="spinner" id="spinner"></div>
+    </button>
+    <p class="lock-note">🔒 Secured by <a href="https://dodopayments.com" target="_blank">Dodo Payments</a> &nbsp;·&nbsp; No account needed &nbsp;·&nbsp; Card or PayPal</p>
+    <div class="error-box" id="errorBox"></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="section-label"><span>02</span> — How it works</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">STEP 01</div><h3>Fill in your details</h3><p>Your website URL, industry, offering, and location tell us exactly where you stand.</p></div>
+    <div class="step"><div class="step-num">STEP 02</div><h3>Pay $2.9 to unlock</h3><p>Secure one-time payment via Dodo Payments. No subscription, no account needed.</p></div>
+    <div class="step"><div class="step-num">STEP 03</div><h3>TrustMRR is queried</h3><p>We search $1.2B of verified revenue data filtered to your exact industry and offering type.</p></div>
+    <div class="step"><div class="step-num">STEP 04</div><h3>See who's ahead</h3><p>A personalised ranked list of startups outpacing you — with verified MRR and descriptions.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2024 FlowPay · <a href="https://flowpay.work">flowpay.work</a></div>
+  <div>Data · <a href="https://trustmrr.com" target="_blank">TrustMRR</a> &nbsp;·&nbsp; Payments · <a href="https://dodopayments.com" target="_blank">Dodo Payments</a></div>
+</footer>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────────────────────────
+  const DODO_BASE    = 'https://checkout.dodopayments.com/buy/pdt_0NZkk9eTnxQIVNzMscS9R?quantity=1';
+  // Change this to your actual deployed results page URL:
+  const RESULTS_BASE = 'https://flowpay.work/results.html';
+
+  // ── TICKER ──────────────────────────────────────────────────────────────────
+  const td = [
+    {n:'Plausible Analytics',m:'$110K/mo',i:'Analytics'},{n:'Lemon Squeezy',m:'$48K/mo',i:'SaaS'},
+    {n:'Carrd',m:'$120K/mo',i:'No-code'},{n:'Gumroad',m:'$800K/mo',i:'E-commerce'},
+    {n:'Transistor.fm',m:'$65K/mo',i:'Podcasting'},{n:'Nomad List',m:'$34K/mo',i:'Marketplace'},
+    {n:'ConvertKit',m:'$2.9M/mo',i:'Email'},{n:'Beehiiv',m:'$430K/mo',i:'Newsletter'},
+    {n:'ShipFast',m:'$55K/mo',i:'SaaS'},{n:'Paddle',m:'$2.1M/mo',i:'Fintech'},
+  ];
+  const trk = document.getElementById('ticker');
+  trk.innerHTML = [...td,...td].map(d =>
+    `<div class="ticker-item"><span class="amt">${d.m}</span><span>${d.n}</span><span style="font-size:.65rem;opacity:.4">${d.i}</span><div class="ticker-dot"></div></div>`
+  ).join('');
+
+  // ── INDUSTRY → TRUSTMRR TYPE ─────────────────────────────────────────────
+  function mapType(industry) {
+    const m = {'SaaS':'saas','E-commerce':'ecommerce','Mobile App':'app','Marketplace':'marketplace',
+      'Fintech':'saas','EdTech':'saas','Developer Tools':'saas','AI / ML':'saas',
+      'Media & Content':'media','Health & Wellness':'saas','Other':'saas'};
+    return m[industry] || 'saas';
+  }
+
+  // ── HANDLE SUBMIT ────────────────────────────────────────────────────────
+  function handleSubmit() {
+    const url      = document.getElementById('websiteUrl').value.trim();
+    const industry = document.getElementById('industry').value;
+    const location = document.getElementById('location').value.trim();
+    const offering = document.getElementById('offering').value.trim();
+    const founder  = document.getElementById('founderName').value.trim();
+    const err      = document.getElementById('errorBox');
+    err.style.display = 'none';
+
+    if (!url || !industry || !founder) {
+      err.textContent = '⚠ Please fill in Website URL, Industry, and Founder Name.';
+      err.style.display = 'block';
+      return;
+    }
+
+    const btn  = document.getElementById('submitBtn');
+    const text = document.getElementById('btnText');
+    const spin = document.getElementById('spinner');
+    btn.disabled = true;
+    text.textContent = 'Preparing checkout…';
+    spin.style.display = 'block';
+
+    // ── Encode the user's input into a compact base64 token ──────────────────
+    // This token is appended to the redirect_url so that after Dodo payment
+    // succeeds, the results page can decode it and call TrustMRR on the user's behalf.
+    const payload = { url, industry, location, offering, founder, type: mapType(industry) };
+    const token   = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+
+    // ── Build redirect URL ───────────────────────────────────────────────────
+    // Dodo appends ?payment_id=xxx to our redirect_url automatically on success.
+    const redirectUrl  = `${RESULTS_BASE}?d=${encodeURIComponent(token)}`;
+    const checkoutLink = `${DODO_BASE}&redirect_url=${encodeURIComponent(redirectUrl)}`;
+
+    setTimeout(() => { window.location.href = checkoutLink; }, 700);
+  }
+</script>
+</body>
+</html>
