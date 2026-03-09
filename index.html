@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stanley C. Banda — Lead Gen & Growth</title>
+  <meta name="description" content="I help startups find their people. Lead generation, content creation, and growth work for modern businesses." />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f7f5f0; --surface: #efecea; --border: #dddad4;
+      --dark: #1c1a16; --dark-mid: #3a3831;
+      --accent: #2a5e22; --accent-light: #e8f0e3; --accent-mid: #4a8e3f;
+      --muted: #8a8780; --card: #ffffff; --text: #2c2a25;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+    ::selection { background: var(--accent-light); color: var(--accent); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 60px; height: 72px; display: flex; align-items: center; justify-content: space-between; background: rgba(247,245,240,.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Lora', serif; font-size: 1.15rem; font-weight: 600; color: var(--dark); letter-spacing: -.02em; }
+    .nav-logo span { color: var(--accent); font-style: italic; }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a { font-size: .82rem; font-weight: 500; color: var(--muted); text-decoration: none; letter-spacing: .04em; transition: color .2s; }
+    .nav-links a:hover { color: var(--dark); }
+    .nav-cta { background: var(--dark) !important; color: var(--bg) !important; padding: 9px 22px !important; border-radius: 50px !important; font-weight: 600 !important; }
+    .nav-cta:hover { background: var(--accent) !important; color: #fff !important; }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1.1fr 0.9fr; align-items: center; max-width: 1200px; margin: 0 auto; padding: 100px 60px 60px; gap: 70px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--accent); font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .1em; padding: 6px 14px; border-radius: 20px; margin-bottom: 28px; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+    .hero h1 { font-family: 'Lora', serif; font-size: clamp(3rem,5vw,4.5rem); font-weight: 600; line-height: 1.08; letter-spacing: -.03em; color: var(--dark); margin-bottom: 22px; }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-desc { font-size: 1rem; color: var(--muted); line-height: 1.78; max-width: 440px; margin-bottom: 36px; }
+    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--dark); color: var(--bg); font-family: 'DM Sans', sans-serif; font-size: .88rem; font-weight: 600; padding: 14px 28px; border-radius: 50px; text-decoration: none; transition: all .22s; }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(42,94,34,.2); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; color: var(--dark); font-size: .88rem; font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: all .2s; }
+    .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+    .hero-socials { display: flex; align-items: center; gap: 12px; margin-top: 28px; }
+    .social-link { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--muted); transition: all .2s; text-decoration: none; background: var(--card); }
+    .social-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+    .social-link svg { width: 15px; height: 15px; }
+
+    /* Photo */
+    .hero-photo-wrap { position: relative; display: flex; align-items: center; justify-content: center; }
+    .hero-photo-frame { position: relative; display: inline-block; }
+    .hero-photo-frame::after { content: ''; position: absolute; bottom: -10px; right: -10px; width: 100%; height: 100%; border-radius: 200px 200px 160px 160px; background: var(--accent-light); z-index: -1; }
+    .hero-photo { width: 380px; max-width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center top; border-radius: 200px 200px 160px 160px; display: block; filter: grayscale(10%) contrast(1.05); border: 3px solid rgba(42,94,34,.12); }
+    .hero-tag { position: absolute; bottom: 48px; left: -30px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; box-shadow: 0 8px 32px rgba(0,0,0,.1); display: flex; align-items: center; gap: 12px; z-index: 2; }
+    .hero-tag-icon { width: 36px; height: 36px; background: var(--accent-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .hero-tag-val { font-weight: 700; font-size: .88rem; color: var(--dark); line-height: 1.2; }
+    .hero-tag-sub { font-size: .7rem; color: var(--muted); }
+    .hero-tag2 { position: absolute; top: 36px; right: -20px; background: var(--dark); border-radius: 12px; padding: 14px 18px; box-shadow: 0 8px 32px rgba(0,0,0,.2); z-index: 2; }
+    .hero-tag2-val { font-family: 'Lora', serif; font-size: 1.6rem; font-style: italic; color: #fff; line-height: 1; }
+    .hero-tag2-sub { font-size: .65rem; color: rgba(255,255,255,.5); letter-spacing: .08em; text-transform: uppercase; margin-top: 2px; }
+
+    /* LOGOS STRIP */
+    .logos-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); padding: 20px 60px; }
+    .logos-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 48px; flex-wrap: wrap; }
+    .logos-label { font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); flex-shrink: 0; white-space: nowrap; }
+    .logos-list { display: flex; align-items: center; gap: 36px; flex-wrap: wrap; }
+    .logo-item { font-family: 'Lora', serif; font-size: .95rem; font-style: italic; font-weight: 600; color: var(--dark-mid); }
+    .logo-sep { color: var(--border); }
+
+    /* SECTIONS */
+    .section { max-width: 1200px; margin: 0 auto; padding: 100px 60px; }
+    .section-kicker { display: inline-flex; align-items: center; gap: 10px; font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .section-kicker::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+    .section-title { font-family: 'Lora', serif; font-size: clamp(1.9rem,3.5vw,2.9rem); font-weight: 600; line-height: 1.15; letter-spacing: -.03em; color: var(--dark); margin-bottom: 14px; }
+    .section-title em { font-style: italic; color: var(--accent); }
+    .section-sub { font-size: .95rem; color: var(--muted); line-height: 1.75; max-width: 520px; margin-bottom: 56px; }
+
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .service-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 36px 28px; position: relative; overflow: hidden; transition: transform .22s, box-shadow .22s, border-color .22s; }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.07); border-color: var(--accent); }
+    .service-icon { width: 48px; height: 48px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 22px; }
+    .service-count { position: absolute; top: 22px; right: 22px; font-family: 'DM Mono', monospace; font-size: .65rem; color: var(--border); }
+    .service-title { font-family: 'Lora', serif; font-size: 1.18rem; font-weight: 600; margin-bottom: 10px; color: var(--dark); }
+    .service-desc { font-size: .87rem; color: var(--muted); line-height: 1.7; }
+
+    /* PROJECTS */
+    .projects-list { display: flex; flex-direction: column; }
+    .proj-item { display: grid; grid-template-columns: 56px 1fr 48px; gap: 28px; align-items: start; padding: 36px 0; border-bottom: 1px solid var(--border); position: relative; }
+    .proj-item:first-child { border-top: 1px solid var(--border); }
+    .proj-item::before { content: ''; position: absolute; left: -60px; right: -60px; top: 0; bottom: 0; background: var(--accent-light); opacity: 0; transition: opacity .2s; border-radius: 12px; pointer-events: none; }
+    .proj-item:hover::before { opacity: 1; }
+    .proj-num { font-family: 'DM Mono', monospace; font-size: .7rem; color: var(--muted); padding-top: 6px; position: relative; z-index: 1; }
+    .proj-body { position: relative; z-index: 1; }
+    .proj-type-tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .08em; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+    .tag-leadgen { background: var(--accent-light); color: var(--accent); }
+    .tag-content { background: #f0ebe8; color: #7a5c3a; }
+    .tag-sold { background: #e8f5e9; color: #2a6a30; }
+    .proj-name { font-family: 'Lora', serif; font-size: 1.3rem; font-weight: 600; color: var(--dark); margin-bottom: 10px; letter-spacing: -.02em; }
+    .proj-desc { font-size: .87rem; color: var(--muted); line-height: 1.7; max-width: 580px; margin-bottom: 16px; }
+    .proj-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .proj-link { display: inline-flex; align-items: center; gap: 6px; font-family: 'DM Mono', monospace; font-size: .68rem; color: var(--accent); background: var(--accent-light); padding: 5px 12px; border-radius: 4px; text-decoration: none; transition: background .2s; }
+    .proj-link:hover { background: #d0e8c8; }
+    .proj-arrow { position: relative; z-index: 1; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--muted); transition: all .22s; margin-top: 4px; flex-shrink: 0; }
+    .proj-item:hover .proj-arrow { background: var(--accent); border-color: var(--accent); color: #fff; transform: rotate(45deg); }
+
+    /* CONTENT / ARTICLES */
+    .articles-wrap { background: var(--surface); }
+    .articles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .article-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 28px; text-decoration: none; color: inherit; transition: all .22s; display: flex; flex-direction: column; gap: 10px; }
+    .article-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,.06); }
+    .article-source { font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+    .article-title { font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 600; color: var(--dark); line-height: 1.35; }
+    .article-meta { font-size: .82rem; color: var(--muted); line-height: 1.65; flex: 1; }
+    .article-cta { display: inline-flex; align-items: center; gap: 6px; font-size: .8rem; font-weight: 600; color: var(--accent); margin-top: 4px; }
+
+    /* CERTIFICATIONS */
+    .certs-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .cert-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: all .22s; }
+    .cert-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,.07); }
+    .cert-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: top; display: block; border-bottom: 1px solid var(--border); }
+    .cert-body { padding: 16px 18px; }
+    .cert-issuer { font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+    .cert-name { font-size: .85rem; font-weight: 600; color: var(--dark); line-height: 1.35; margin-bottom: 6px; }
+    .cert-date { font-family: 'DM Mono', monospace; font-size: .62rem; color: var(--accent); }
+
+    /* STORY (dark section) */
+    .story-section { background: var(--dark); padding: 100px 60px; }
+    .story-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .story-kicker { display: inline-flex; align-items: center; gap: 10px; font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-mid); margin-bottom: 20px; }
+    .story-kicker::before { content: ''; width: 24px; height: 1px; background: var(--accent-mid); }
+    .story-title { font-family: 'Lora', serif; font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 600; line-height: 1.18; letter-spacing: -.03em; color: #f7f5f0; margin-bottom: 24px; }
+    .story-title em { font-style: italic; color: var(--accent-mid); }
+    .story-body { font-size: .92rem; color: rgba(247,245,240,.55); line-height: 1.82; margin-bottom: 16px; }
+    .story-stats { display: flex; flex-direction: column; gap: 18px; }
+    .story-stat { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 24px 28px; display: flex; align-items: center; gap: 20px; }
+    .story-stat-num { font-family: 'Lora', serif; font-size: 2.4rem; font-style: italic; color: var(--accent-mid); line-height: 1; flex-shrink: 0; min-width: 80px; }
+    .story-stat-title { font-weight: 600; color: #f7f5f0; font-size: .9rem; margin-bottom: 4px; }
+    .story-stat-sub { font-size: .78rem; color: rgba(247,245,240,.42); line-height: 1.5; }
+
+    /* CTA */
+    .cta-section { padding: 120px 60px; text-align: center; position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; top: -30%; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; background: radial-gradient(circle,rgba(42,94,34,.07) 0%,transparent 65%); pointer-events: none; }
+    .cta-actions { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .btn-large { padding: 16px 38px !important; font-size: .95rem !important; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; font-size: .78rem; color: var(--muted); }
+    footer a { color: var(--muted); text-decoration: none; transition: color .2s; }
+    footer a:hover { color: var(--accent); }
+    .footer-socials { display: flex; gap: 20px; }
+
+    /* RESPONSIVE */
+    @media(max-width:960px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 90px 24px 60px; gap: 48px; }
+      .hero-photo { width: 300px; }
+      .hero-tag { bottom: 20px; left: 0; }
+      .hero-tag2 { top: 20px; right: 0; }
+      .logos-strip { padding: 18px 24px; }
+      .section { padding: 72px 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .proj-item { grid-template-columns: 40px 1fr; }
+      .proj-arrow { display: none; }
+      .articles-wrap .section { padding: 72px 24px; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .certs-grid { grid-template-columns: 1fr 1fr; }
+      .story-section { padding: 72px 24px; }
+      .story-inner { grid-template-columns: 1fr; gap: 48px; }
+      .cta-section { padding: 80px 24px; }
+      footer { padding: 24px; flex-direction: column; gap: 16px; text-align: center; }
+    }
+    @media(max-width:540px) { .certs-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Stanley <span>Banda</span></div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#content">Content</a>
+    <a href="#certs">Credentials</a>
+    <a href="#contact" class="nav-cta">Let's talk</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-badge">Available for new projects</div>
+    <h1>Hey, I'm<br/><em>Stanley.</em><br/>I find people<br/>for businesses.</h1>
+    <p class="hero-desc">
+      I help startups grow by finding the right leads, creating content that converts,
+      and building growth engines that actually work — from photographers to cannabis
+      dispensaries, I get specific.
+    </p>
+    <div class="hero-actions">
+      <a href="#work" class="btn-primary">
+        See my work
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contact" class="btn-ghost">Get in touch <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+    </div>
+    <div class="hero-socials">
+      <a href="https://x.com/chiswanjo" target="_blank" class="social-link" title="X / Twitter">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/chiswanjo/" target="_blank" class="social-link" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10V9h4v1.5A6 6 0 0 1 16 8zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://www.instagram.com/chiswanjo/" target="_blank" class="social-link" title="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-frame">
+      <img src="profile_image.jpg" alt="Stanley C. Banda" class="hero-photo" />
+      <div class="hero-tag">
+        <div class="hero-tag-icon">🎯</div>
+        <div>
+          <div class="hero-tag-val">Lead Gen & Content</div>
+          <div class="hero-tag-sub">Photographers · Cannabis · SaaS</div>
+        </div>
+      </div>
+      <div class="hero-tag2">
+        <div class="hero-tag2-val">$950</div>
+        <div class="hero-tag2-sub">Content exit</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos-strip">
+  <div class="logos-inner">
+    <div class="logos-label">Worked with</div>
+    <div class="logos-list">
+      <span class="logo-item">Gamut.io</span>
+      <span class="logo-sep">·</span>
+      <span class="logo-item">Monarch.is</span>
+      <span class="logo-sep">·</span>
+      <span class="logo-item">JustRaisedFunding</span>
+      <span class="logo-sep">·</span>
+      <span class="logo-item">LinkedIn Learning</span>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT I DO -->
+<section class="section">
+  <div class="section-kicker">What I do</div>
+  <h2 class="section-title">I solve real problems<br/>for <em>real businesses</em></h2>
+  <p class="section-sub">Whether you need a full pipeline of qualified leads, content that positions your brand, or a growth strategy — I build things that work.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-count">01</div>
+      <div class="service-icon">🎯</div>
+      <div class="service-title">Lead Generation</div>
+      <p class="service-desc">I research, find, and qualify the exact prospects your business needs — structured and ready for outreach. No scraped junk. Just the right people.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-count">02</div>
+      <div class="service-icon">✍️</div>
+      <div class="service-title">Content Creation</div>
+      <p class="service-desc">Articles, guides, and content strategies that rank and convert. I've written for Gamut.io and built and sold a content property for $950.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-count">03</div>
+      <div class="service-icon">📈</div>
+      <div class="service-title">Growth & Strategy</div>
+      <p class="service-desc">Connecting audience, message, and channel — then executing. Backed by training in email marketing, operations, and communications.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="work" style="padding-top:0;">
+  <div class="section-kicker">Projects</div>
+  <h2 class="section-title">Work I've <em>shipped</em></h2>
+  <p class="section-sub">Three projects. Two lead gen clients. One sold content property. Here's the full story.</p>
+  <div class="projects-list">
+
+    <div class="proj-item">
+      <div class="proj-num">01</div>
+      <div class="proj-body">
+        <span class="proj-type-tag tag-leadgen">Lead Generation · Content</span>
+        <div class="proj-name">Gamut.io — Photographers &amp; SEO Content</div>
+        <p class="proj-desc">Gamut.io needed to grow their creator base with professional photographers. I researched and sourced a qualified list of photographers matching their platform criteria — outreach-ready. I also produced SEO articles targeting wedding photographers searching for camera gear, bringing organic traffic to their platform.</p>
+        <div class="proj-links">
+          <a href="https://gamut.io/the-best-panasonic-cameras-for-weddings/" target="_blank" class="proj-link">↗ Best Panasonic Cameras for Weddings</a>
+          <a href="https://gamut.io/the-best-sony-cameras-for-weddings/" target="_blank" class="proj-link">↗ Best Sony Cameras for Weddings</a>
+        </div>
+      </div>
+      <div class="proj-arrow">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-num">02</div>
+      <div class="proj-body">
+        <span class="proj-type-tag tag-leadgen">Lead Generation · Content</span>
+        <div class="proj-name">Monarch.is — Cannabis Dispensary Leads &amp; Content</div>
+        <p class="proj-desc">Monarch.is needed to reach cannabis dispensaries across key markets. I built a targeted, verified prospect list organised by geography and operating status — ready for their sales team to act on immediately. I also contributed published content as a verified author on their platform.</p>
+        <div class="proj-links">
+          <a href="https://www.monarch.is/author/stan3837/" target="_blank" class="proj-link">↗ Author page on Monarch.is</a>
+        </div>
+      </div>
+      <div class="proj-arrow">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-num">03</div>
+      <div class="proj-body">
+        <span class="proj-type-tag tag-sold">Built &amp; Sold · $950</span>
+        <div class="proj-name">JustRaisedFunding.com — Content Exit</div>
+        <p class="proj-desc">Built a niche content property targeting startups that had recently closed funding rounds. I defined the content strategy, produced the assets, grew the audience, and exited the entire property for $950. Proof that content built with intent can become a real, sellable asset.</p>
+        <div class="proj-links">
+          <a href="https://justraisedfunding.com" target="_blank" class="proj-link">↗ justraisedfunding.com</a>
+        </div>
+      </div>
+      <div class="proj-arrow">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTENT WORK -->
+<div class="articles-wrap" id="content">
+  <section class="section" style="max-width:1200px; margin:0 auto;">
+    <div class="section-kicker">Published work</div>
+    <h2 class="section-title">Content that <em>performs</em></h2>
+    <p class="section-sub">Research-backed, SEO-aware articles written for real audiences. Built to rank and to convert.</p>
+    <div class="articles-grid">
+      <a href="https://gamut.io/the-best-panasonic-cameras-for-weddings/" target="_blank" class="article-card">
+        <div class="article-source">Gamut.io</div>
+        <div class="article-title">The Best Panasonic Cameras for Weddings</div>
+        <p class="article-meta">A buyer's guide for wedding photographers evaluating Panasonic options — built for search traffic and audience trust.</p>
+        <div class="article-cta">Read article <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+      </a>
+      <a href="https://gamut.io/the-best-sony-cameras-for-weddings/" target="_blank" class="article-card">
+        <div class="article-source">Gamut.io</div>
+        <div class="article-title">The Best Sony Cameras for Weddings</div>
+        <p class="article-meta">In-depth camera guide covering Sony's top options for wedding photographers — specs, use cases, and honest recommendations.</p>
+        <div class="article-cta">Read article <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+      </a>
+      <a href="https://www.monarch.is/author/stan3837/" target="_blank" class="article-card">
+        <div class="article-source">Monarch.is</div>
+        <div class="article-title">Author Profile — Cannabis &amp; Dispensary Content</div>
+        <p class="article-meta">Published as a verified author on Monarch.is, covering the cannabis retail and dispensary space with research-driven articles.</p>
+        <div class="article-cta">View author page <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- STORY (dark) -->
+<section class="story-section">
+  <div class="story-inner">
+    <div>
+      <div class="story-kicker">The story</div>
+      <h2 class="story-title">I don't just find leads.<br/>I find the <em>right</em> ones.</h2>
+      <p class="story-body">Every business has a specific person they need to reach — a photographer who fits a platform's creator profile, a dispensary in the right state, a funded startup ready to buy. My job is finding that person faster than you could yourself.</p>
+      <p class="story-body">I combine research skills with content strategy to build pipelines that convert — and I've proved the model by building and selling a content property for real money.</p>
+      <p class="story-body">Backed by LinkedIn Learning certifications in email marketing, social media copywriting, operations management, and emotional intelligence — I bring both the strategy and the execution.</p>
+    </div>
+    <div class="story-stats">
+      <div class="story-stat">
+        <div class="story-stat-num">2+</div>
+        <div>
+          <div class="story-stat-title">Lead Gen Clients</div>
+          <div class="story-stat-sub">Gamut.io for photographers, Monarch.is for cannabis dispensaries</div>
+        </div>
+      </div>
+      <div class="story-stat">
+        <div class="story-stat-num">$950</div>
+        <div>
+          <div class="story-stat-title">Content Property Sold</div>
+          <div class="story-stat-sub">Built and exited JustRaisedFunding.com — start to finish</div>
+        </div>
+      </div>
+      <div class="story-stat">
+        <div class="story-stat-num">4×</div>
+        <div>
+          <div class="story-stat-title">LinkedIn Learning Certifications</div>
+          <div class="story-stat-sub">Email marketing, social copywriting, ops management, emotional intelligence</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section" id="certs">
+  <div class="section-kicker">Credentials</div>
+  <h2 class="section-title">LinkedIn Learning <em>Certificates</em></h2>
+  <p class="section-sub">Completed by Stanley C. Banda. Continuous learning is part of how I stay sharp and deliver real value.</p>
+  <div class="certs-grid">
+    <div class="cert-card">
+      <img src="cert_email.jpg" alt="Email Marketing: Strategy and Optimization" class="cert-img" />
+      <div class="cert-body">
+        <div class="cert-issuer">LinkedIn Learning</div>
+        <div class="cert-name">Email Marketing: Strategy &amp; Optimization</div>
+        <div class="cert-date">Aug 2023</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <img src="cert_social.jpg" alt="Copywriting for Social Media" class="cert-img" />
+      <div class="cert-body">
+        <div class="cert-issuer">LinkedIn Learning</div>
+        <div class="cert-name">Marketing: Copywriting for Social Media</div>
+        <div class="cert-date">Aug 2023</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <img src="cert_ops.png" alt="Operations Management Foundations" class="cert-img" />
+      <div class="cert-body">
+        <div class="cert-issuer">LinkedIn Learning</div>
+        <div class="cert-name">Operations Management Foundations</div>
+        <div class="cert-date">Aug 2022</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <img src="cert_eq.png" alt="Communicating with Emotional Intelligence" class="cert-img" />
+      <div class="cert-body">
+        <div class="cert-issuer">LinkedIn Learning</div>
+        <div class="cert-name">Communicating with Emotional Intelligence</div>
+        <div class="cert-date">Aug 2022</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="section-kicker" style="justify-content:center;display:inline-flex;">Let's work together</div>
+  <h2 class="section-title" style="margin-top:16px;">Got a business problem?<br/>Let me <em>solve it.</em></h2>
+  <p class="section-sub" style="margin:16px auto 40px;text-align:center;">Whether you need leads, content, or both — I'd love to hear what you're building.</p>
+  <div class="cta-actions">
+    <a href="mailto:stanleycbanda@gmail.com" class="btn-primary btn-large">
+      Email me directly
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/chiswanjo/" target="_blank" class="btn-ghost">Connect on LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 Stanley C. Banda · <a href="https://x.com/chiswanjo" target="_blank">@chiswanjo</a></div>
+  <div class="footer-socials">
+    <a href="https://x.com/chiswanjo" target="_blank">X</a>
+    <a href="https://www.linkedin.com/in/chiswanjo/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/chiswanjo/" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+</body>
+</html>
